@@ -1,0 +1,1128 @@
+{
+	"info": {
+		"_postman_id": "d78087a1-3d62-4b44-a4ca-bd50830925ba",
+		"name": "Approov 2 - Kong Plugin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "v1",
+			"item": [
+				{
+					"name": "/hello",
+					"item": [
+						{
+							"name": "NOT Protected by an Approov Token",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{DOMAIN}}/v1/hello",
+									"host": [
+										"{{DOMAIN}}"
+									],
+									"path": [
+										"v1",
+										"hello"
+									]
+								},
+								"description": "This type of request will not require an Approov Token to be present in the headers of the request."
+							},
+							"response": [
+								{
+									"name": "NOT Protected by an Approov Token",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{DOMAIN}}/v1/hello",
+											"host": [
+												"{{DOMAIN}}"
+											],
+											"path": [
+												"v1",
+												"hello"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "25"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Date",
+											"value": "Mon, 10 Feb 2020 18:10:53 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "Werkzeug/0.15.2 Python/3.6.7"
+										},
+										{
+											"key": "X-Kong-Upstream-Latency",
+											"value": "267"
+										},
+										{
+											"key": "X-Kong-Proxy-Latency",
+											"value": "302"
+										},
+										{
+											"key": "Via",
+											"value": "kong/1.5.0"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"text\": \"Hello, World!\"\n}"
+								}
+							]
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "/shapes",
+					"item": [
+						{
+							"name": "valid requests",
+							"item": [
+								{
+									"name": "Valid signature and expire time",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Approov-Token",
+												"type": "text",
+												"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImFwcHJvb3YifQ.eyJleHAiOjQ3MDg2ODMyMDUuODkxOTEyfQ.lZnuTLsu0K1YIoq9kWp0vljx6CWzOldPp6wmNxPBG5I"
+											}
+										],
+										"url": {
+											"raw": "{{DOMAIN}}/v1/shapes",
+											"host": [
+												"{{DOMAIN}}"
+											],
+											"path": [
+												"v1",
+												"shapes"
+											]
+										},
+										"description": "The Approov Token payload must contain always the mandatory key `exp`, that contains the unix timestamp for the time the token will expire, thus this time must be less or equal to the current time.\n\nA JWT token is formed by 3 parts separated by dots, like `header.payload.signature`, thus the third part of the token must have been signed with the same secret Kong knows."
+									},
+									"response": [
+										{
+											"name": "Valid signature and expire time",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Approov-Token",
+														"type": "text",
+														"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImFwcHJvb3YifQ.eyJleHAiOjQ3MDg2ODMyMDUuODkxOTEyfQ.lZnuTLsu0K1YIoq9kWp0vljx6CWzOldPp6wmNxPBG5I"
+													}
+												],
+												"url": {
+													"raw": "{{DOMAIN}}/v1/shapes",
+													"host": [
+														"{{DOMAIN}}"
+													],
+													"path": [
+														"v1",
+														"shapes"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Content-Length",
+													"value": "21"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Date",
+													"value": "Mon, 17 Feb 2020 15:17:33 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Werkzeug/0.15.2 Python/3.6.7"
+												},
+												{
+													"key": "X-Kong-Upstream-Latency",
+													"value": "62"
+												},
+												{
+													"key": "X-Kong-Proxy-Latency",
+													"value": "2"
+												},
+												{
+													"key": "Via",
+													"value": "kong/1.5.0"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"shape\": \"Triangle\"\n}"
+										}
+									]
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "invalid requests",
+							"item": [
+								{
+									"name": "Missing the Approov  Token",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{DOMAIN}}/v1/shapes",
+											"host": [
+												"{{DOMAIN}}"
+											],
+											"path": [
+												"v1",
+												"shapes"
+											]
+										},
+										"description": "The request is missing the header for setting the Approov Token, in the likes of `--header 'Approov-Token: Bearer header.payload.signature`."
+									},
+									"response": [
+										{
+											"name": "Missing the Approov  Token",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{DOMAIN}}/v1/shapes",
+													"host": [
+														"{{DOMAIN}}"
+													],
+													"path": [
+														"v1",
+														"shapes"
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Date",
+													"value": "Mon, 17 Feb 2020 15:19:28 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Content-Length",
+													"value": "26"
+												},
+												{
+													"key": "X-Kong-Response-Latency",
+													"value": "0"
+												},
+												{
+													"key": "Server",
+													"value": "kong/1.5.0"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Unauthorized\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Malformed Approov Token",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Approov-Token",
+												"type": "text",
+												"value": "adasdasdsadasd"
+											}
+										],
+										"url": {
+											"raw": "{{DOMAIN}}/v1/shapes",
+											"host": [
+												"{{DOMAIN}}"
+											],
+											"path": [
+												"v1",
+												"shapes"
+											]
+										},
+										"description": "A JWT token is formed by 3 parts separated by dots, like `header.payload.signature`, thus anything we pass for the Approov Token in the form of a dummy string, like `adasdasdsadasd`, must be considered invalid, and this one doesn't even contain the dot separators."
+									},
+									"response": [
+										{
+											"name": "Malformed Approov Token",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Approov-Token",
+														"type": "text",
+														"value": "adasdasdsadasd"
+													}
+												],
+												"url": {
+													"raw": "{{DOMAIN}}/v1/shapes",
+													"host": [
+														"{{DOMAIN}}"
+													],
+													"path": [
+														"v1",
+														"shapes"
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Date",
+													"value": "Mon, 10 Feb 2020 18:12:57 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Content-Length",
+													"value": "26"
+												},
+												{
+													"key": "X-Kong-Response-Latency",
+													"value": "0"
+												},
+												{
+													"key": "Server",
+													"value": "kong/1.5.0"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Unauthorized\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Missing  `kid` in  JWT header",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Approov-Token",
+												"type": "text",
+												"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjQ3MDg2ODMzNTUuMjI3NDE1LCJwYXkiOiJmM1UyZm5pQkpWRTA0VGRlY2owZDZvclY5cVQ5dDUyVGpmSHhkVXFEQmdZPSJ9.dEstT0XWf3BJUlurXoGm_XOJyUK3ZkpxyqlUcY7u1kY"
+											}
+										],
+										"url": {
+											"raw": "{{DOMAIN}}/v1/shapes",
+											"host": [
+												"{{DOMAIN}}"
+											],
+											"path": [
+												"v1",
+												"shapes"
+											]
+										},
+										"description": "The Kong JWT plugin needs to know what secret to use to check the signature of the JWT, and that is done via the key `kid` in the JWT header. \n\nThe `kid` value is the name for the key that will be used to retrieve the secret from the database."
+									},
+									"response": [
+										{
+											"name": "Missing  `kid` in  JWT header",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Approov-Token",
+														"type": "text",
+														"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjQ3MDg2ODMzNTUuMjI3NDE1LCJwYXkiOiJmM1UyZm5pQkpWRTA0VGRlY2owZDZvclY5cVQ5dDUyVGpmSHhkVXFEQmdZPSJ9.dEstT0XWf3BJUlurXoGm_XOJyUK3ZkpxyqlUcY7u1kY"
+													}
+												],
+												"url": {
+													"raw": "{{DOMAIN}}/v1/shapes",
+													"host": [
+														"{{DOMAIN}}"
+													],
+													"path": [
+														"v1",
+														"shapes"
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Date",
+													"value": "Mon, 17 Feb 2020 15:31:35 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Content-Length",
+													"value": "42"
+												},
+												{
+													"key": "X-Kong-Response-Latency",
+													"value": "1"
+												},
+												{
+													"key": "Server",
+													"value": "kong/1.5.0"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"No mandatory 'kid' in claims\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Invalid Signature  for the Approov Token",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Approov-Token",
+												"type": "text",
+												"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImFwcHJvb3YifQ.eyJleHAiOjE1NTUwODMzNDkuMzc3NzYyM30.vbTlW5hqBlhu0kFr_JsHLb_CfM-DmUz2_xPZ92I0NjQ"
+											}
+										],
+										"url": {
+											"raw": "{{DOMAIN}}/v1/shapes",
+											"host": [
+												"{{DOMAIN}}"
+											],
+											"path": [
+												"v1",
+												"shapes"
+											]
+										},
+										"description": "The Approov Token must be signed with the same secret shared betwen the backened and the Approov Cloud service."
+									},
+									"response": [
+										{
+											"name": "Invalid Signature  for the Approov Token",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Approov-Token",
+														"type": "text",
+														"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImFwcHJvb3YifQ.eyJleHAiOjE1NTUwODMzNDkuMzc3NzYyM30.vbTlW5hqBlhu0kFr_JsHLb_CfM-DmUz2_xPZ92I0NjQ"
+													}
+												],
+												"url": {
+													"raw": "{{DOMAIN}}/v1/shapes",
+													"host": [
+														"{{DOMAIN}}"
+													],
+													"path": [
+														"v1",
+														"shapes"
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Date",
+													"value": "Mon, 17 Feb 2020 15:37:34 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Content-Length",
+													"value": "31"
+												},
+												{
+													"key": "X-Kong-Response-Latency",
+													"value": "0"
+												},
+												{
+													"key": "Server",
+													"value": "kong/1.5.0"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"message\": \"Invalid signature\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Missing expiration time in Approov Token",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Approov-Token",
+												"type": "text",
+												"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImFwcHJvb3YifQ.eyJpc3MiOiJhcHByb292LmlvIn0.q9U0X8yzUKRnelO-qdx-FCXB57GdKUicVdz1rCLiOWU"
+											}
+										],
+										"url": {
+											"raw": "{{DOMAIN}}/v1/shapes",
+											"host": [
+												"{{DOMAIN}}"
+											],
+											"path": [
+												"v1",
+												"shapes"
+											]
+										},
+										"description": "The Approov Token payload must contain always the mandatory key `exp`, that contains the unix timestamp for the time the token will expire."
+									},
+									"response": [
+										{
+											"name": "Missing expiration time in Approov Token",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Approov-Token",
+														"type": "text",
+														"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImFwcHJvb3YifQ.eyJpc3MiOiJhcHByb292LmlvIn0.q9U0X8yzUKRnelO-qdx-FCXB57GdKUicVdz1rCLiOWU"
+													}
+												],
+												"url": {
+													"raw": "{{DOMAIN}}/v1/shapes",
+													"host": [
+														"{{DOMAIN}}"
+													],
+													"path": [
+														"v1",
+														"shapes"
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Date",
+													"value": "Mon, 17 Feb 2020 15:43:35 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Content-Length",
+													"value": "26"
+												},
+												{
+													"key": "X-Kong-Response-Latency",
+													"value": "1"
+												},
+												{
+													"key": "Server",
+													"value": "kong/1.5.0"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"exp\": \"must be a number\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Expired Approov Token with valid signature",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Approov-Token",
+												"type": "text",
+												"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImFwcHJvb3YifQ.eyJleHAiOjE1NTUwODMzNDkuMzc3NzYyM30.m7fPoDvOAFmYFLueQtiTBsjzJmUc-Jd4OAcRbOXL8wE"
+											}
+										],
+										"url": {
+											"raw": "{{DOMAIN}}/v1/shapes",
+											"host": [
+												"{{DOMAIN}}"
+											],
+											"path": [
+												"v1",
+												"shapes"
+											]
+										},
+										"description": "The Approov Token payload mandatory key `exp` contains an expired unix timestamp."
+									},
+									"response": [
+										{
+											"name": "Expired Approov Token with valid signature Copy",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Approov-Token",
+														"type": "text",
+														"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImFwcHJvb3YifQ.eyJleHAiOjE1NTUwODMzNDkuMzc3NzYyM30.m7fPoDvOAFmYFLueQtiTBsjzJmUc-Jd4OAcRbOXL8wE"
+													}
+												],
+												"url": {
+													"raw": "{{DOMAIN}}/v1/shapes",
+													"host": [
+														"{{DOMAIN}}"
+													],
+													"path": [
+														"v1",
+														"shapes"
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Date",
+													"value": "Mon, 17 Feb 2020 15:46:03 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Content-Length",
+													"value": "23"
+												},
+												{
+													"key": "X-Kong-Response-Latency",
+													"value": "1"
+												},
+												{
+													"key": "Server",
+													"value": "kong/1.5.0"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"exp\": \"token expired\"\n}"
+										}
+									]
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "8214c06f-a36f-40be-8a52-213a03bec995",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "ccc2a488-8afd-48ef-a2fd-cce54374c647",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "/forms",
+					"item": [
+						{
+							"name": "valid requests",
+							"item": [
+								{
+									"name": "Valid token binding, that matches the Authorization token",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Approov-Token",
+												"type": "text",
+												"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImFwcHJvb3YifQ.eyJleHAiOjM5NjQyNTU3ODEuNDE1NjI4LCJwYXkiOiJWUUZGUEpaNjgyYU90eFJNanowa3RDSG15V2VFRWVTTXZYaDF1RDhKM3ZrPSJ9.BBUkJoN98V5-_tR9sKN1CgOEl-bDUqrhQK_yWcXisis"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{DOMAIN}}/v1/forms",
+											"host": [
+												"{{DOMAIN}}"
+											],
+											"path": [
+												"v1",
+												"forms"
+											]
+										},
+										"description": "The value for the key `pay` in the Approov Token payload is a base64 string of the SHA256 hash for the Authorization token.\n\nThis ties the approov token with the user Authentication token, thus securing further the request."
+									},
+									"response": [
+										{
+											"name": "Valid token binding, that matches the Authorization token",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Approov-Token",
+														"type": "text",
+														"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImFwcHJvb3YifQ.eyJleHAiOjM5NjQyNTU3ODEuNDE1NjI4LCJwYXkiOiJWUUZGUEpaNjgyYU90eFJNanowa3RDSG15V2VFRWVTTXZYaDF1RDhKM3ZrPSJ9.BBUkJoN98V5-_tR9sKN1CgOEl-bDUqrhQK_yWcXisis"
+													},
+													{
+														"key": "Authorization",
+														"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "{{DOMAIN}}/v1/forms",
+													"host": [
+														"{{DOMAIN}}"
+													],
+													"path": [
+														"v1",
+														"forms"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Content-Length",
+													"value": "16"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 20 Feb 2020 18:33:58 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Werkzeug/0.15.2 Python/3.6.7"
+												},
+												{
+													"key": "X-Kong-Upstream-Latency",
+													"value": "64"
+												},
+												{
+													"key": "X-Kong-Proxy-Latency",
+													"value": "1"
+												},
+												{
+													"key": "Via",
+													"value": "kong/1.5.0"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"form\": \"Cone\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Without token binding, but valid Approov Token",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Approov-Token",
+												"type": "text",
+												"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImFwcHJvb3YifQ.eyJleHAiOjQ3MDg2ODMyMDUuODkxOTEyfQ.lZnuTLsu0K1YIoq9kWp0vljx6CWzOldPp6wmNxPBG5I"
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+											}
+										],
+										"url": {
+											"raw": "{{DOMAIN}}/v1/forms",
+											"host": [
+												"{{DOMAIN}}"
+											],
+											"path": [
+												"v1",
+												"forms"
+											]
+										},
+										"description": "We need to accept the request as valid when the expected key `pay` is missing in the payload of the Approov Token, because when the Approov token comes from the Approov failover system it will not contain it."
+									},
+									"response": [
+										{
+											"name": "Without token binding, but valid Approov Token",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Approov-Token",
+														"type": "text",
+														"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImFwcHJvb3YifQ.eyJleHAiOjQ3MDg2ODMyMDUuODkxOTEyfQ.lZnuTLsu0K1YIoq9kWp0vljx6CWzOldPp6wmNxPBG5I"
+													},
+													{
+														"key": "Authorization",
+														"type": "text",
+														"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+													}
+												],
+												"url": {
+													"raw": "{{DOMAIN}}/v1/forms",
+													"host": [
+														"{{DOMAIN}}"
+													],
+													"path": [
+														"v1",
+														"forms"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												},
+												{
+													"key": "Content-Length",
+													"value": "15"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Date",
+													"value": "Thu, 20 Feb 2020 18:34:18 GMT"
+												},
+												{
+													"key": "Server",
+													"value": "Werkzeug/0.15.2 Python/3.6.7"
+												},
+												{
+													"key": "X-Kong-Upstream-Latency",
+													"value": "60"
+												},
+												{
+													"key": "X-Kong-Proxy-Latency",
+													"value": "2"
+												},
+												{
+													"key": "Via",
+													"value": "kong/1.5.0"
+												}
+											],
+											"cookie": [],
+											"body": "{\n    \"form\": \"Box\"\n}"
+										}
+									]
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "invalid requests",
+							"item": [
+								{
+									"name": "Missing Token binding header",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Approov-Token",
+												"type": "text",
+												"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImFwcHJvb3YifQ.eyJleHAiOjQ3MDg2ODM0NTcsInBheSI6IjU2NnZRV2FXR0JncytLRTh5c2pUVFBRdGdwdWUrWExNcXg4ZVlvYkNySTA9In0.9FGvK0ElAgJFglH14rRRhu3gRZpDuT_C_50TdC0TWd0"
+											}
+										],
+										"url": {
+											"raw": "{{DOMAIN}}/v1/forms",
+											"host": [
+												"{{DOMAIN}}"
+											],
+											"path": [
+												"v1",
+												"forms"
+											]
+										},
+										"description": "The Approov Token Binding contained in the payload key `pay` binds to an header in the request, like the `Authorization` token, thus if not present the Approov Token Binding cannot be validated."
+									},
+									"response": [
+										{
+											"name": "Missing Token binding header",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Approov-Token",
+														"type": "text",
+														"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImFwcHJvb3YifQ.eyJleHAiOjQ3MDg2ODM0NTcsInBheSI6IjU2NnZRV2FXR0JncytLRTh5c2pUVFBRdGdwdWUrWExNcXg4ZVlvYkNySTA9In0.9FGvK0ElAgJFglH14rRRhu3gRZpDuT_C_50TdC0TWd0"
+													}
+												],
+												"url": {
+													"raw": "{{DOMAIN}}/v1/forms",
+													"host": [
+														"{{DOMAIN}}"
+													],
+													"path": [
+														"v1",
+														"forms"
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Date",
+													"value": "Thu, 20 Feb 2020 18:35:24 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Content-Length",
+													"value": "2"
+												},
+												{
+													"key": "X-Kong-Response-Latency",
+													"value": "0"
+												},
+												{
+													"key": "Server",
+													"value": "kong/1.5.0"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								},
+								{
+									"name": "Token binding not matching the Authorization token",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Approov-Token",
+												"type": "text",
+												"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImFwcHJvb3YifQ.eyJleHAiOjQ3MDg2ODM0NTcuNDg1Mzk1LCJwYXkiOiI1NjZ2UVdhV0dCZ3MrS0U4eXNqVFRQUXRncHVlK1hMTXF4OGVZb2JDckkwPSJ9.lDSAuPPYWLEYuPMZLQrPFqyQlHOebzwiZLhvNbsapeU"
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+											}
+										],
+										"url": {
+											"raw": "{{DOMAIN}}/v1/forms",
+											"host": [
+												"{{DOMAIN}}"
+											],
+											"path": [
+												"v1",
+												"forms"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Token binding not matching the Authorization token",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Approov-Token",
+														"type": "text",
+														"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImtpZCI6ImFwcHJvb3YifQ.eyJleHAiOjQ3MDg2ODM0NTcuNDg1Mzk1LCJwYXkiOiI1NjZ2UVdhV0dCZ3MrS0U4eXNqVFRQUXRncHVlK1hMTXF4OGVZb2JDckkwPSJ9.lDSAuPPYWLEYuPMZLQrPFqyQlHOebzwiZLhvNbsapeU"
+													},
+													{
+														"key": "Authorization",
+														"type": "text",
+														"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+													}
+												],
+												"url": {
+													"raw": "{{DOMAIN}}/v1/forms",
+													"host": [
+														"{{DOMAIN}}"
+													],
+													"path": [
+														"v1",
+														"forms"
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Date",
+													"value": "Thu, 20 Feb 2020 18:34:49 GMT"
+												},
+												{
+													"key": "Content-Type",
+													"value": "application/json; charset=utf-8"
+												},
+												{
+													"key": "Connection",
+													"value": "keep-alive"
+												},
+												{
+													"key": "Content-Length",
+													"value": "2"
+												},
+												{
+													"key": "X-Kong-Response-Latency",
+													"value": "1"
+												},
+												{
+													"key": "Server",
+													"value": "kong/1.5.0"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "8214c06f-a36f-40be-8a52-213a03bec995",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "ccc2a488-8afd-48ef-a2fd-cce54374c647",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "f330f4df-eb8d-4f4d-898b-284c6f4acb33",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "787feafd-5feb-4d77-b05b-282b270e7f14",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
