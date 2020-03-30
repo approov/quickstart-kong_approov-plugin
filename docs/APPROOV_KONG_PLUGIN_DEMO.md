@@ -1,23 +1,23 @@
 # APPROOV KONG PLUGIN DEMO
 
-This demo will show how to protect API endpoints with an Apprrov Token and with the Approov Token binding.
+This demo will show how to protect API endpoints with an Approov token and with the Approov token binding.
 
 ## DEMO CONTEXT
 
-For this Approov demo we will use the API at `https://python-flask-shapes-demo.pdm.approov.io/v1`, to simulate a Third Party API, that we have no control of, but that we want to protect from being abused and exploited through us.
+For this Approov demo we will use the API at `https://python-flask-shapes-demo.pdm.approov.io/v1` to simulate a Third Party API which we have no control over, but which we want to protect from being abused and exploited.
 
-The `v1` API have three routes `v1/hello`, `v1/shapes` and `v1/forms`, and we will not be protecting the `v1/hello`, but the other ones we care about protecting. The `v1/shapes` and `v1/forms` will be protected by an Approov Token check, but for `v1/forms` we require user authentication, and for enhanced security we will bind the `Authentication` token with the `Approov-Token`, thus we will enable the Approov Token Binding check for it.
+The `v1` API has three routes: `v1/hello`, `v1/shapes` and `v1/forms`. We will not be protecting the `v1/hello`, but the other ones we care about protecting. The `v1/shapes` and `v1/forms` will be protected by an Approov Token check. For `v1/forms` we require user authentication and for enhanced security we will bind the `Authentication` token with the `Approov-Token`, thus we will enable the Approov Token Binding check.
 
 
 ## DEMO QUICK START
 
-This demo runs in top of the [Kong Docker Stack](/docs/KONG_DOCKER_STACK.md), and it's made easy to use by invoking the [./kong](/bin/kong.sh) helper script.
+This demo runs on top of the [Kong Docker Stack](/docs/KONG_DOCKER_STACK.md), and it's made easy to use by invoking the [./kong](/bin/kong.sh) helper script.
 
 This wraps a series of `curl` requests to the Kong Admin API in order to setup the Approov demo. If you want to learn how it works under the hood, then feel free to read the Kong Admin API [Step by Step](/docs/KONG_ADMIN_API_STEP_BY_STEP.md) or the [Deep Dive](/docs/KONG_ADMIN_API_DEEP_DIVE.md).
 
 ### Starting the Kong Demo for Approov
 
-This will take some time, specially on the first run, where it needs to pull and build the docker images, and run the migrations. Subsequent runs will be much faster to start.
+This will take some time, especially on the first run, where it needs to pull and build the docker images and run the migrations. Subsequent runs will be much faster to start.
 
 ##### command:
 
@@ -60,7 +60,7 @@ X-Kong-Admin-Latency: 9
 
 ### Making Requests to the Third Party API
 
-In order to test the Approov integration with the Kong API Gateway we will perform some requests to the Third Party API, that will cover both valid and invalid requests for Approov Tokens with and without token binding.
+In order to test the Approov integration with the Kong API Gateway we will perform some requests to the Third Party API which will cover both valid and invalid requests for Approov Tokens, with and without token binding.
 
 Feel free to modify the examples we are providing for Postman and Curl, so that you can try as many edge cases as you can think of.
 

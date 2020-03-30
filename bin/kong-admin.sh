@@ -21,7 +21,7 @@ approov:demo-setup                           Configures the Approov demo in one 
 consumer:new                                 Creates a new consumer.
                                              $ ./kong-admin consumer:new shapes-mobile-app
 
-consumer:add-base64url-secret                Add the base64url safe encoded secret.
+consumer:add-base64url-secret                Adds the base64url safe encoded secret.
                                              $ ./kong-admin consumer:add-base64url-secret <consumer-name> <key-id-for-the-secret>
                                              $ ./kong-admin consumer:add-base64url-secret shapes-mobile-app approov
 
@@ -29,11 +29,11 @@ service:new                                  Creates a new Kong service.
                                              $ ./kong-admin <service-name> <url-to-forward-requests>
                                              $ ./kong-admin service:new approov-token https://example.com
 
-service:add-route-by-path                    Add a route to the service for the given path.
+service:add-route-by-path                    Adds a route to the service for the given path.
                                              $ ./kong-admin <service-name> <domain-service-is-listening-on> <route-path>
                                              $ ./kong-admin service:add-route-by-path approov-token domain.com /v1/shapes
 
-service:add-all-routes                       Add all routes to the service.
+service:add-all-routes                       Adds all routes to the service.
                                              $ ./kong-admin <service-name> <domain-service-is-listening-on>
                                              $ ./kong-admin service:add-route-by-path approov-token domain.com
 

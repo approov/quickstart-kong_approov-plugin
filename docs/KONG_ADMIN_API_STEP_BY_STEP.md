@@ -1,6 +1,6 @@
 # KONG ADMIN API - STEP BY STEP
 
-This step by step runs on top of the [Kong Docker Stack](/docs/KONG_DOCKER_STACK.md).
+This step by step guide runs on top of the [Kong Docker Stack](/docs/KONG_DOCKER_STACK.md).
 
 We will see how the Kong Admin API was used under the hood in this [Approov Demo](/docs/APPROOV_KONG_PLUGIN_DEMO).
 
@@ -18,7 +18,7 @@ Before you start please ensure the Kong Docker Stack is up and running:
 
 ### Approov Secret
 
-Please follow [this instructions](/docs/APPROOV_SECRET.md#the-dummy-secret) to setup it.
+Please follow [these instructions](/docs/APPROOV_SECRET.md#the-dummy-secret) to set it up.
 
 ## HELP
 
@@ -47,7 +47,7 @@ approov:demo-setup                           Configures the Approov demo in one 
 consumer:new                                 Creates a new consumer.
                                              $ ./kong-admin consumer:new shapes-mobile-app
 
-consumer:add-base64url-secret                Add the base64url safe encoded secret.
+consumer:add-base64url-secret                Adds the base64url safe encoded secret.
                                              $ ./kong-admin consumer:add-base64url-secret <consumer-name> <key-id-for-the-secret>
                                              $ ./kong-admin consumer:add-base64url-secret shapes-mobile-app approov
 
@@ -55,11 +55,11 @@ service:new                                  Creates a new Kong service.
                                              $ ./kong-admin <service-name> <url-to-forward-requests>
                                              $ ./kong-admin service:new approov-token https://example.com
 
-service:add-route-by-path                    Add a route to the service for the given path.
+service:add-route-by-path                    Adds a route to the service for the given path.
                                              $ ./kong-admin <service-name> <domain-service-is-listening-on> <route-path>
                                              $ ./kong-admin service:add-route-by-path approov-token domain.com /v1/shapes
 
-service:add-all-routes                       Add all routes to the service.
+service:add-all-routes                       Adds all routes to the service.
                                              $ ./kong-admin <service-name> <domain-service-is-listening-on>
                                              $ ./kong-admin service:add-route-by-path approov-token domain.com
 
@@ -74,7 +74,7 @@ service:enable-approov-token-binding-plugin  Enables and configures the plugin t
 
 ## KONG CONSUMER
 
-In order to add the security layer for the Approov Token Service we need to create a consumer for it, that will hold the secret to be used later by the Kong JWT plugin to verify the signature for the `Approov-Token`.
+In order to add the security layer for the Approov Token Service we need to create a consumer for it which will hold the secret to be used later by the Kong JWT plugin to verify the signature for the `Approov-Token`.
 
 ### Creating a new Kong Consumer
 
@@ -114,7 +114,7 @@ To confirm the Approov Secret was added as the JWT credential we can visit http:
 
 ## KONG SERVICE FOR THE APPROOV TOKEN
 
-In order to check for the Approov token we will need to create a Kong service, add routes to it, enable the Kong JWT plugin to validate the `Approov-Token`, and finally we need to add the `shapes-mobile-app` consumer to this service.
+In order to check the Approov token we will need to create a Kong service, add routes to it, enable the Kong JWT plugin to validate the `Approov-Token`, and finally we will need to add the `shapes-mobile-app` consumer to this service.
 
 ### Creating the Approov Token Service
 
@@ -164,7 +164,7 @@ We can confirm the response for the request by visiting http://localhost:8001/se
 
 ### Smoke Testing the Approov Token Service
 
-To test the service we will send a request to the Kong API Gateway, that will proxy it to the backend based on the `Host` header provided in the request.
+To test the service we will send a request to the Kong API Gateway which will be proxied to the backend based on the `Host` header provided in the request.
 
 ##### request:
 
@@ -183,7 +183,7 @@ Now that we know Kong is forwarding correctly our requests, it's time to add the
 
 ### Enabling the Kong JWT plugin for the Approov Token service
 
-The Approov Token service was created to match all routes for `/v1/shapes/*`, therefore any matching request will be checked for having an `Approov-Token`, that is correctly signed, and that is not expired, and on success the request will be forwarded, and on failure the request is immediately terminated.
+The Approov Token service was created to match all routes for `/v1/shapes/*`, therefore any matching request will be checked for the existence of an `Approov-Token` which is correctly signed and has not expired. On a successful check the request will be forwarded and if it fails the request is immediately terminated.
 
 #### Command signature
 
@@ -201,7 +201,7 @@ We can visit http://localhost:8001/services/approov-token/plugins to confirm the
 
 ## KONG SERVICE FOR THE APPROOV TOKEN BINDING
 
-This will be very similar to what we have done for the Approov Token Service, therefore I will give the sequence of commands, without explaining them, except for when we do something extra.
+This will be very similar to what we have done for the Approov Token Service, therefore I will give the sequence of commands without explaining them, except when we do something extra.
 
 ### Creating the Approov Token Binding Service
 

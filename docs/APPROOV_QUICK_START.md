@@ -1,15 +1,15 @@
 # APPROOV QUICK START
 
-This quick start is targeting developers familiar with Kong, that are looking for a quick intro in how they can add [Approov](https://approov.io) into an existing project, therefore this will guide you through the necessary steps for adding Approov to an existing Kong API Gateway in a testing environment. Don't try this for the first time in production.
+This quick start is for developers familiar with Kong who are looking for a quick intro into how they can add [Approov](https://approov.io) into an existing project. Therefore this will guide you through the necessary steps for adding Approov to an existing Kong API Gateway in a testing environment. Don't try this for the first time in production.
 
-> **NOTE**: If you don't have one or prefer to test the Approov Quick Start before you try it out in your own project, then use the **Kong Docker Stack** from this repo by following the instructions for [Trialling in a Test Setup](#trialling-in-a-test-setup), that are located at the end of this document.
+> **NOTE**: If you don't have one or if you prefer to test the Approov Quick Start before you try it out in your own project, then use the **Kong Docker Stack** from this repo by following the instructions for [Trialling in a Test Setup](#trialling-in-a-test-setup) which are located at the end of this document.
 
 For advanced usage of Approov in a Kong API Gateway please read the [Kong Admin API Deep Dive](/docs/KONG_ADMIN_API_DEEP_DIVE.md) guide.
 
 
 ## APPROOV SECRET
 
-We need an [Approov secret](https://approov.io/docs/latest/approov-cli-tool-reference/#secret-command) to check the signature in the JWT tokens, and we need to use the same one used by the [Approov Cloud service](https://www.approov.io/approov-in-detail.html) to sign the [Approov Tokens](https://www.approov.io/docs/latest/approov-usage-documentation/#approov-tokens) issued to our mobile app.
+We need an [Approov secret](https://approov.io/docs/latest/approov-cli-tool-reference/#secret-command) to check the signature in the JWT tokens and we need to use the same one used by the [Approov Cloud service](https://www.approov.io/approov-in-detail.html) to sign the [Approov Tokens](https://www.approov.io/docs/latest/approov-usage-documentation/#approov-tokens) issued to our mobile app.
 
 ### Install the Approov CLI Tool
 
@@ -17,7 +17,7 @@ If you haven't done it already, please follow [these instructions](https://appro
 
 ### The Approov Secret Key Identifier(kid)
 
-The native Kong JWT plugin requires that the Approov Token contains in it's header the key `kid` to [identify](https://approov.io/docs/latest/approov-usage-documentation/#token-secret-extraction) what secret to use in order to verify the signature of the JWT token, like this:
+The native Kong JWT plugin requires that the Approov Token contains the key ‘kid’ in its header to [identify](https://approov.io/docs/latest/approov-usage-documentation/#token-secret-extraction) what secret to use in order to verify the signature of the JWT token, like this:
 
 ```json
 {
@@ -38,19 +38,19 @@ Please replace `your-approov-kid-here` with the unique identifier you want to us
 
 ## KONG ADMIN API SETUP
 
-The official docs for Kong recommend the use of `curl` requests to configure it through it's Admin API, and that's the way we will use here.
+The official docs for Kong recommend the use of `curl` requests to configure it through its Admin API, and that's what we will do here.
 
-We assume that the Kong Admin API is only listening in the default `localhost` network `127.0.0.1` and port `8001`, therefore available via `http://localhost:8001/admin-path-here`, but if this is not your case, then replace `http://localhost:8001` with the correct protocol, domain and port.
+We assume that the Kong Admin API is only listening to the default `localhost` network `127.0.0.1` and port `8001`, available via `http://localhost:8001/admin-path-here`. If this is not true in your case, then replace `http://localhost:8001` with the correct protocol, domain and port.
 
-> **NOTE:** The protocol being used here is `http` for accessing the `localhost` network `127.0.0.1`, but if your setup is exposing the Kong Admin API over the internet, then please use `https` protocol in all examples through this docs.
+> **NOTE:** The protocol being used here is `http` for accessing the `localhost` network `127.0.0.1`, but if your setup is exposing the Kong Admin API over the internet, then please use `https` protocol in all examples through this document.
 
 ### Updating the Kong Consumer with the Approov Secret
 
 In the `--url` option you need to replace `your-consumer-name-here` with the name of your consumer.
 
-The value in `-data key=...` is the one you have set previously when following the [above instructions](#approov-secret) for the Approov secret.
+The value in `-data key=...` is the one you set previously when following the [above instructions](#approov-secret) for the Approov secret.
 
-For the value of `--data secret=...` we will need to retrieve the Approov secret from the Approv cloud service, and we will use the Approov CLI tool for that.
+For the value of `--data secret=...` we will need to retrieve the Approov secret from the Approov cloud service, and we will use the Approov CLI tool for that.
 
 ##### request:
 
@@ -69,7 +69,7 @@ To confirm the Approov Secret was added as the JWT credential we can visit http:
 
 ### Enabling the Kong JWT plugin to check the Approov Token
 
-You need to enable the Approov Token check in a per Kong service basis.
+You need to enable the Approov Token check on a per Kong service basis.
 
 In the `--url` option you need to replace `your-service-name-here` with the service name you want to protect with an Approov Token, thus repeat this `curl` request for each service you want to protect with Approov.
 
@@ -90,7 +90,7 @@ Visit http://localhost:8001/services/your-service-name-here/plugins to confirm t
 
 ## TRIALLING IN A TEST SETUP
 
-To test the Approov Quick Start, before using it in a real project of yours, just follow the next steps.
+To test the Approov Quick Start, before using it in your real project, just follow the next steps.
 
 ### Kong Docker Stack
 
@@ -106,7 +106,7 @@ This will give you a Kong API Gateway with a consumer named as `quick-start-app`
 
 #### Updating the Kong Consumer with the Approov Secret
 
-For testing purposes we don't need to retrieve the secret from the Approov cloud service, instead we have created a dummy one in `.env.example` in the var `APPROOV_BASE64URL_SECRET`. Read more in [APPOOV_SECRET.md](/docs/APPROOV_SECRET.md#the-dummy-secret).
+For testing purposes we don't need to retrieve the secret from the Approov cloud service. Instead we have created a dummy one in `.env.example` in the var `APPROOV_BASE64URL_SECRET`. Read more in [APPOOV_SECRET.md](/docs/APPROOV_SECRET.md#the-dummy-secret).
 
 ##### request:
 
@@ -119,7 +119,7 @@ output=$(source .env.example && curl -i -X POST \
     --data secret="${APPROOV_BASE64URL_SECRET? Missing the Approov Secret in the .env file.}") && echo $output
 ```
 
-> **NOTE**: We use a sub shell to execute this request to avoid the secret `APPROOV_BASE64URL_SECRET` from the `.env.example` to be persisted into the bash history of your shell.
+> **NOTE**: We use a sub shell to execute this request to avoid the secret `APPROOV_BASE64URL_SECRET` from the `.env.example` to be persisted in the bash history of your shell.
 
 To confirm the Approov Secret was added as the JWT credential we can visit http://localhost:8001/consumers/quick-start-app/jwt.
 
