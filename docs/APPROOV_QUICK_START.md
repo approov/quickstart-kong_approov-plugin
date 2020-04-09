@@ -1,6 +1,8 @@
 # APPROOV QUICK START
 
-This quick start is for developers familiar with Kong who are looking for a quick intro into how they can add [Approov](https://approov.io) into an existing project. Therefore this will guide you through the necessary steps for adding Approov to an existing Kong API Gateway in a testing environment. Don't try this for the first time in production.
+This quick start is for developers familiar with Kong who are looking for a quick intro into how they can add [Approov](https://approov.io) into an existing project. Therefore this will guide you through the necessary steps for adding Approov to an existing Kong API Gateway.
+
+We strongly advise you to try first this quick start in a development environment, and just follow it in a production environment when you understand how Approov works within your Kong deployment.
 
 > **NOTE**: If you don't have one or if you prefer to test the Approov Quick Start before you try it out in your own project, then use the **Kong Docker Stack** from this repo by following the instructions for [Trialling in a Test Setup](#trialling-in-a-test-setup) which are located at the end of this document.
 
