@@ -29,8 +29,11 @@ We will use the [Approov CLI Tool](https://approov.io/docs/v2.2/approov-installa
 ##### command:
 
 ```
-approov secret path/to/admin.token -get base64url
+approov secret -get base64url
 ```
+
+> **NOTE:** The `approov secret` command requires an [administration role](https://approov.io/docs/latest/approov-usage-documentation/#account-access-roles) to execute successfully.
+
 
 ##### output:
 
@@ -64,7 +67,9 @@ The native Kong JWT plugin requires that the Approov Token contains in it's head
 In order to set the `kid` for each Approov Token issued we will use the [Approov CLI Tool](https://approov.io/docs/v2.2/approov-installation/#approov-tool) as mentioned in the [Approov docs](https://approov.io/docs/v2.2/approov-usage-documentation/#key-ids):
 
 ```
-approov secret path/to/admin.token -setKeyID approov
+approov secret -setKeyID approov
 ```
+
+> **NOTE:** The `approov secret` command requires an [administration role](https://approov.io/docs/latest/approov-usage-documentation/#account-access-roles) to execute successfully.
 
 We used the string `approov` for the identifier, but you are free to use whatsoever unique string identifier for your own project.
