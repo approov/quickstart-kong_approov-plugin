@@ -32,8 +32,10 @@ The native Kong JWT plugin requires that the Approov Token contains the key ‘k
 In order to set the `kid` for each Approov Token issued we will use the [Approov CLI Tool](https://approov.io/docs/latest/approov-installation/#approov-tool) as mentioned in the [Approov docs](https://approov.io/docs/latest/approov-usage-documentation/#key-ids):
 
 ```
-approov secret path/to/admin.token -setKeyID your-approov-kid-here
+approov secret -setKeyID your-approov-kid-here
 ```
+
+> **NOTE:** The `approov secret` command requires an [administration role](https://approov.io/docs/latest/approov-usage-documentation/#account-access-roles) to execute successfully.
 
 Please replace `your-approov-kid-here` with the unique identifier you want to use for the Approov Secret in your Kong API Gateway.
 
@@ -62,10 +64,11 @@ curl -i -X POST \
     --header "Content-Type: application/x-www-form-urlencoded" \
     --data algorithm="HS256" \
     --data key=your-approov-kid-here \
-    --data secret=$(approov secret path/to/admin.token -get base64url | head -2 | tail -1)
+    --data secret=$(approov secret -get base64url | head -2 | tail -1)
 ```
 
 >**NOTE:**: We retrieved the Approov secret in a sub shell, because if we had provided it directly then the secret would have been saved into the shell history.
+>**NOTE:** The `approov secret` command requires an [administration role](https://approov.io/docs/latest/approov-usage-documentation/#account-access-roles) to execute successfully.
 
 To confirm the Approov Secret was added as the JWT credential we can visit http://localhost:8001/consumers/your-consumer-name-here/jwt.
 
