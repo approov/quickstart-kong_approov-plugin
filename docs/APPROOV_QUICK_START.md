@@ -115,7 +115,7 @@ This will give you a Kong API Gateway with a consumer named as `quick-start-app`
 
 #### Updating the Kong Consumer with the Approov Secret
 
-For testing purposes we don't need to retrieve the secret from the Approov cloud service. Instead we have created a dummy one in `.env.example` in the var `APPROOV_BASE64URL_SECRET`. Read more in [APPOOV_SECRET.md](/docs/APPROOV_SECRET.md#the-dummy-secret).
+For testing purposes we don't need to retrieve the secret from the Approov cloud service. Instead we have created a dummy one in `.env.example` in the var `APPROOV_BASE64URL_SECRET`. Read more in [APPROOV_SECRET.md](/docs/APPROOV_SECRET.md#the-dummy-secret).
 
 ##### request:
 
