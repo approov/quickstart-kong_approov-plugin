@@ -17,6 +17,12 @@ We need an [Approov secret](https://approov.io/docs/latest/approov-cli-tool-refe
 
 If you haven't done it already, please follow [these instructions](https://approov.io/docs/latest/approov-installation/#approov-tool) from the Approov docs to download and install the [Approov CLI Tool](https://approov.io/docs/latest/approov-cli-tool-reference/).
 
+Next, enable your Approov `admin` role with:
+
+```bash
+eval `approov role admin`
+```
+
 ### The Approov Secret Key Identifier(kid)
 
 The native Kong JWT plugin requires that the Approov Token contains the key ‘kid’ in its header to [identify](https://approov.io/docs/latest/approov-usage-documentation/#token-secret-extraction) what secret to use in order to verify the signature of the JWT token, like this:
@@ -34,8 +40,6 @@ In order to set the `kid` for each Approov Token issued we will use the [Approov
 ```
 approov secret -setKeyID your-approov-kid-here
 ```
-
-> **NOTE:** The `approov secret` command requires an [administration role](https://approov.io/docs/latest/approov-usage-documentation/#account-access-roles) to execute successfully.
 
 Please replace `your-approov-kid-here` with the unique identifier you want to use for the Approov Secret in your Kong API Gateway.
 

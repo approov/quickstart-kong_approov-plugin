@@ -26,20 +26,16 @@ In production we don't use a custom dummy secret, instead we need to use the sam
 
 We will use the [Approov CLI Tool](https://approov.io/docs/v2.2/approov-installation/#approov-tool) to download the [Approov secret](https://approov.io/docs/v2.2/approov-cli-tool-reference/#secret-command).
 
-##### command:
+First, enable your Approov `admin` role with:
 
+```bash
+eval `approov role admin`
 ```
+
+Next, retrieve the Approov secret:
+
+```bash
 approov secret -get base64url
-```
-
-> **NOTE:** The `approov secret` command requires an [administration role](https://approov.io/docs/latest/approov-usage-documentation/#account-access-roles) to execute successfully.
-
-
-##### output:
-
-```
-note: secret is base64url encoded and must be decoded to its binary form to verify Approov tokens
-here_will_be_the_base64_url_safe_encoded_secret
 ```
 
 ## Adding the Approov Secret to the Environment File
