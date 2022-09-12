@@ -21,6 +21,12 @@ Next, enable your Approov `admin` role with:
 
 ```bash
 eval `approov role admin`
+````
+
+For the Windows powershell:
+
+```bash
+set APPROOV_ROLE=admin:___YOUR_APPROOV_ACCOUNT_NAME_HERE___
 ```
 
 ### The Approov Secret Key Identifier(kid)
