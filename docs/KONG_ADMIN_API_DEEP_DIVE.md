@@ -83,7 +83,7 @@ In order to check for the Approov token we will need to create a Kong service, a
 
 The parameter `name` in `--data 'name=approov-token'` is used to set the name for the service to `approov-token`, but you are free to choose whatever you like.
 
-The parameter `url` in `--data url=https://python-flask-shapes-demo.pdm.approov.io`  is used to set the url for the Third Party API or backend where we want to proxy the requests. So in this case the url `https://python-flask-shapes-demo.pdm.approov.io` is the Third Party API that we want to proxy the requests to, and protect the access with an Approov Token.
+The parameter `url` in `--data url=https://shapes.demo.approov.io`  is used to set the url for the Third Party API or backend where we want to proxy the requests. So in this case the url `https://shapes.demo.approov.io` is the Third Party API that we want to proxy the requests to, and protect the access with an Approov Token.
 
 ##### request:
 
@@ -91,7 +91,7 @@ The parameter `url` in `--data url=https://python-flask-shapes-demo.pdm.approov.
 curl -i -X POST \
   --url http://localhost:8001/services/ \
   --data name=approov-token \
-  --data url=https://python-flask-shapes-demo.pdm.approov.io
+  --data url=https://shapes.demo.approov.io
 ```
 
 Visit http://localhost:8001/services/ to confirm the response.
@@ -184,7 +184,7 @@ This will be very similar to what we did for the Approov Token Service, therefor
 curl -i -X POST \
   --url http://localhost:8001/services/ \
   --data name=approov-token-binding \
-  --data url=https://python-flask-shapes-demo.pdm.approov.io
+  --data url=https://shapes.demo.approov.io
 ```
 
 ### Adding Routes to the Approov Token Binding Service

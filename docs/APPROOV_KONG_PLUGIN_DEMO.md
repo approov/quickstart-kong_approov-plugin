@@ -4,7 +4,7 @@ This demo will show how to protect API endpoints with an Approov token and with 
 
 ## DEMO CONTEXT
 
-For this Approov demo we will use the API at `https://python-flask-shapes-demo.pdm.approov.io/v1` to simulate a Third Party API which we have no control over, but which we want to protect from being abused and exploited.
+For this Approov demo we will use the API at `https://shapes.demo.approov.io/v1` to simulate a Third Party API which we have no control over, but which we want to protect from being abused and exploited.
 
 The `v1` API has three routes: `v1/hello`, `v1/shapes` and `v1/forms`. We will not be protecting the `v1/hello`, but the other ones we care about protecting. The `v1/shapes` and `v1/forms` will be protected by an Approov Token check. For `v1/forms` we require user authentication and for enhanced security we will bind the `Authentication` token with the `Approov-Token`, thus we will enable the Approov Token Binding check.
 

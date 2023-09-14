@@ -9,7 +9,7 @@ For a quick start of integrating Approov in your current Kong API Gateway please
 
 ## APROOV DEMO
 
-This [demo](/docs/APPROOV_KONG_PLUGIN_DEMO.md) has the goal of showing to bot experienced and inexperienced Kong users how Approov can be integrated in the Kong API Gateway, and also includes the Approov Token Binding check, an advanced feature of Approov.
+This [demo](/docs/APPROOV_KONG_PLUGIN_DEMO.md) has the goal of showing to both experienced and inexperienced Kong users how Approov can be integrated in the Kong API Gateway, and also includes the Approov Token Binding check, an advanced feature of Approov.
 
 
 ## KONG ADMIN

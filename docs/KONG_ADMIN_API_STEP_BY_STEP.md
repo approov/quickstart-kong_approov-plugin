@@ -129,7 +129,7 @@ In order to check the Approov token we will need to create a Kong service, add r
 ```
 ./kong-admin service:new \
     approov-token \
-    https://python-flask-shapes-demo.pdm.approov.io
+    https://shapes.demo.approov.io
 ```
 
 We can now visit http://localhost:8001/services/ to confirm the response for the above command.
@@ -208,7 +208,7 @@ This will be very similar to what we have done for the Approov Token Service, th
 ```
 ./kong-admin service:new \
     approov-token-binding \
-    https://python-flask-shapes-demo.pdm.approov.io
+    https://shapes.demo.approov.io
 ```
 
 ### Adding Routes to the Approov Token Binding Service
